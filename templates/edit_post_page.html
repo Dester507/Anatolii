@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block Name %}
+    Редагування поста
+{% endblock %}
+
+{% block fullContent %}
+    <div class="container mt-5">
+        <h1>Редагування поста</h1>
+        <form method="post">
+            <input type="text" name="post_title" id="post_title" class="form-control" value="{{ post.post_title }}" placeholder="Назва поста"><br>
+            <textarea name="post_about" id="post_about" class="form-control" placeholder="Тема">{{ post.post_about }}</textarea><br>
+            <textarea name="post_text" id="post_text" class="form-control" placeholder="Пост">{{ post.post_text }}</textarea><br>
+            <input type="submit" class="btn btn-success" value="Підтвердити">
+        </form>
+    </div>
+{% endblock %}

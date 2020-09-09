@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+
+{% block Name %}
+    Створення нового поста
+{% endblock %}
+
+{% block fullContent %}
+    <div class="container mt-5">
+        <h1>Створення поста</h1>
+        <form method="post">
+            <input type="text" name="post_title" id="post_title" class="form-control" placeholder="Назва поста"><br>
+            <textarea name="post_about" id="post_about" class="form-control" placeholder="Тема"></textarea><br>
+            <textarea name="post_text" id="post_text" class="form-control" placeholder="Пост"></textarea><br>
+            <input type="text" name="post_author" id="post_author" class="form-control" placeholder="Ім'я автора"><br>
+            <input type="submit" class="btn btn-success" value="Створити">
+        </form>
+    </div>
+{% endblock %}

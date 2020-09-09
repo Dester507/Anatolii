@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block Name %}
+    Пости
+{% endblock %}
+
+{% block fullContent %}
+    {% if len_posts != 0 %}
+        {% for i in all_posts %}
+            <div class="alert alert-success">
+                <h1 class="alert-heading">{{ i.post_title }}</h1>
+                <p>{{ i.post_about}}</p>
+                <hr>
+                <p>Автор - <strong>{{ i.post_author }}</strong></p>
+                <hr>
+                <p class="mb-0">Дата публікації - {{ i.created_date.date() }} , Редагування - {{ i.post_last_edit_time.time() }}</p>
+                <a href="/allPosts/post/{{ i.id }}" class="btn btn-info">Переглянути</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h2>На цій сторінці немає постів</h2>
+    {% endif %}
+    <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="/allPosts/{{ id_list - 1 }}">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="/allPosts/1">1</a></li>
+            <li class="page-item"><a class="page-link" href="/allPosts/2">2</a></li>
+            <li class="page-item"><a class="page-link" href="/allPosts/3">3</a></li>
+            <li class="page-item"><a class="page-link" href="/allPosts/{{ id_list + 1 }}">Next</a></li>
+          </ul>
+        </nav>
+{% endblock %}
