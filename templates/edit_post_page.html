@@ -1,7 +1,16 @@
-{% extends 'main.html' %}
+{% extends 'main.html'%}
 
 {% block Name %}
     Редагування поста
+{% endblock %}
+
+{% block login_logout %}
+    {% if login == True %}
+        <a class="btn btn-danger" href="/logout">Вихід</a>
+    {% else %}
+        <a class="btn btn-info" href="/login">Вхід</a>
+        <a class="btn btn-warning" href="/register">Реєстрація</a>
+    {% endif %}
 {% endblock %}
 
 {% block fullContent %}

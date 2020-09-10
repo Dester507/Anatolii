@@ -4,6 +4,15 @@
     Пости
 {% endblock %}
 
+{% block login_logout %}
+    {% if login == True %}
+        <a class="btn btn-danger" href="/logout">Вихід</a>
+    {% else %}
+        <a class="btn btn-info" href="/login">Вхід</a>
+        <a class="btn btn-warning" href="/register">Реєстрація</a>
+    {% endif %}
+{% endblock %}
+
 {% block fullContent %}
     {% if len_posts != 0 %}
         {% for i in all_posts %}
@@ -15,6 +24,10 @@
                 <hr>
                 <p class="mb-0">Дата публікації - {{ i.created_date.date() }} , Редагування - {{ i.post_last_edit_time.time() }}</p>
                 <a href="/allPosts/post/{{ i.id }}" class="btn btn-info">Переглянути</a>
+                {% if access == True %}
+                    <a href="/allPosts/post/{{ i.id }}/delete" class="btn btn-danger">Видалити</a>
+                    <a href="/allPosts/post/{{ i.id }}/edit" class="btn btn-secondary">Редагувати</a>
+                {% endif %}
             </div>
         {% endfor %}
     {% else %}

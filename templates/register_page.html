@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block Name %}
+Реєстрація
+{% endblock %}
+
+{% block login_logout %}
+    {% if login == True %}
+        <a class="btn btn-danger" href="/logout">Вихід</a>
+    {% else %}
+        <a class="btn btn-info" href="/login">Вхід</a>
+        <a class="btn btn-warning" href="/register">Реєстрація</a>
+    {% endif %}
+{% endblock %}
+
+{% block fullContent %}
+    <form  method="POST">
+        <input type="text" name="username" placeholder="Логін" required/>
+        <input type="password" name="password" placeholder="Пароль" required/>
+        <input type="email" name="email" placeholder="Пошта" required/>
+        <input type="submit" placeholder="Створити"/>
+    </form>
+    {% if create == True %}
+        <h2 class="p-2 text-danger"><strong>Такий користувач вже існує</strong></h2>
+    {% endif %}
+{% endblock %}

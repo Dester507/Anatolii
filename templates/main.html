@@ -15,7 +15,7 @@
             <a class="p-2 text-dark" href="/allPosts/1">Блоги</a>
             <a class="btn btn-success" href="/create">Створити</a>
         </nav>
-        <a class="btn btn-outline-primary" href="/login">Вхід</a>
+        {% block login_logout %}{% endblock %}
     </div>
 {% block fullContent %}{% endblock %}
 </body>

@@ -4,6 +4,15 @@
     {{ post.post_title }}
 {% endblock %}
 
+{% block login_logout %}
+    {% if login == True %}
+        <a class="btn btn-danger" href="/logout">Вихід</a>
+    {% else %}
+        <a class="btn btn-info" href="/login">Вхід</a>
+        <a class="btn btn-warning" href="/register">Реєстрація</a>
+    {% endif %}
+{% endblock %}
+
 {% block fullContent %}
         <div class="alert alert-info">
             <h1 class="alert-heading">{{ post.post_title }}</h1>
@@ -14,6 +23,4 @@
             <hr>
             <p class="mb-0">Дата публікації - {{ post.created_date.date() }}, Редагування - {{ post.post_last_edit_time.time() }}</p>
         </div>
-            <a href="/allPosts/post/{{ post.id }}/delete" class="btn btn-danger">Видалити</a>
-            <a href="/allPosts/post/{{ post.id }}/edit" class="btn btn-secondary">Редагувати</a>
 {% endblock %}

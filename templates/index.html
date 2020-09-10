@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 
 {% block Name %}
-Вхід
+Головна
 {% endblock %}
 
 {% block login_logout %}
@@ -14,12 +14,12 @@
 {% endblock %}
 
 {% block fullContent %}
-    <form  method="POST">
-        <input type="text" name="username" required/>
-        <input type="password" name="password" required/>
-        <input type="submit" placeholder="Увійти"/>
-    </form>
-    {% if error_msg != '' %}
-    <h2 class="p-2 text-danger"><strong>{{ error_msg }}</strong></h2>
-    {% endif %}
+    <main role="main">
+        <section class="jumbotron text-center">
+            <div class="container">
+              <h1 class="jumbotron-heading">Тестове завдання</h1>
+              <p class="lead text-muted">Виконував: Демчук Анатолій</p>
+            </div>
+        </section>
+    </main>
 {% endblock %}
