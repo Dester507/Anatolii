@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+
+{% block Name %}
+Теги
+{% endblock %}
+
+{% block login_logout %}
+    {% if login == True %}
+        <a class="btn btn-danger" href="/logout">Вихід</a>
+    {% else %}
+        <a class="btn btn-info" href="/login">Вхід</a>
+        <a class="btn btn-warning" href="/register">Реєстрація</a>
+    {% endif %}
+{% endblock %}
+
+{% block fullContent %}
+    <a class="btn btn-primary" href="/tags/sport/1" role="button">Спорт</a>
+    <a class="btn btn-primary" href="/tags/education/1" role="button">Навчання</a>
+    <a class="btn btn-primary" href="/tags/film/1" role="button">Кіно</a>
+    <a class="btn btn-primary" href="/tags/lifehacks/1" role="button">Лайфхаки</a>
+    <a class="btn btn-primary" href="/tags/life/1" role="button">Життя</a>
+    <a class="btn btn-primary" href="/tags/news/1" role="button">Новини</a>
+    <a class="btn btn-primary" href="/tags/policy/1" role="button">Політика</a>
+{% endblock %}

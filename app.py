@@ -4,10 +4,11 @@ from flask import Flask, render_template, request, url_for, redirect, session, g
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///testblogdate.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///testblog.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 app.secret_key = 'destertopinworld'
+#tags_list = ['Спорт', 'Навчання', 'Кіно', 'Лайфхаки', 'Життя', 'Робота', 'Новини', 'Політика']
 
 
 class Posts(db.Model):
@@ -16,15 +17,17 @@ class Posts(db.Model):
     post_about = db.Column(db.String(128), nullable=False)
     post_text = db.Column(db.Text(), nullable=False)
     post_author = db.Column(db.Text(25), nullable=False)
+    tag = db.Column(db.Text(30), nullable=False)
     created_date = db.Column(db.DateTime, default=datetime.datetime.now)
     post_last_edit_time = db.Column(db.DateTime)
 
-    def __init__(self, post_title, post_about, post_text, post_author, post_last_edit_time):
+    def __init__(self, post_title, post_about, post_text, post_author, post_last_edit_time, tag):
         self.post_title = post_title
         self.post_about = post_about
         self.post_text = post_text
         self.post_author = post_author
         self.post_last_edit_time = post_last_edit_time
+        self.tag = tag
 
     def __repr__(self):
         return '<Posts %r>' % self.id
@@ -70,6 +73,44 @@ def main_page(id_list):
                                access=True, login=True)
     return render_template('all_posts_page.html', all_posts=all_posts, len_posts=len_posts, id_list=id_list,
                            access=False, login=False)
+
+
+#Теги
+@app.route('/tags')
+def tags():
+    if g.user:
+        return render_template('tags.html', login=True)
+    return render_template('tags.html', login=False)
+
+
+#Пошук по тегу
+@app.route('/tags/<string:tag>/<int:id_list>')
+def show_tag(tag, id_list):
+    tag_ua = ''
+    if tag == 'sport':
+        tag_ua = 'Спорт'
+    elif tag == 'education':
+        tag_ua = 'Навчання'
+    elif tag == 'film':
+        tag_ua = 'Кіно'
+    elif tag == 'lifehacks':
+        tag_ua = 'Лайфхаки'
+    elif tag == 'life':
+        tag_ua = 'Життя'
+    elif tag == 'news':
+        tag_ua = 'Новини'
+    elif tag == 'policy':
+        tag_ua = 'Політика'
+    post_list = Posts.query.filter_by(tag=tag_ua).order_by(Posts.created_date.desc()).all()
+    id_size = id_list*10-10
+    post_list = post_list[id_size:]
+    post_list = post_list[:10]
+    len_posts = len(post_list)
+    if g.user:
+        return render_template('post_by_tag.html', login=True, posts=post_list, tag_ua=tag_ua, len_posts=len_posts,
+                               id_list=id_list, access=True, tag=tag)
+    return render_template('post_by_tag.html', login=False, posts=post_list, tag_ua=tag_ua, len_posts=len_posts,
+                           id_list=id_list, access=False, tag=tag)
 
 
 #Відображення одного поста
@@ -171,7 +212,7 @@ def before_request():
         g.user = session['user']
 
 
-#drop session
+#Вихід
 @app.route('/logout')
 def logout():
     if g.user:
@@ -188,7 +229,8 @@ def create_post():
         post_text = request.form['post_text']
         post_about = request.form['post_about']
         post_author = request.form['post_author']
-        post = Posts(post_title=post_title, post_about=post_about, post_text=post_text, post_author=post_author, post_last_edit_time=datetime.datetime.now())
+        tag = request.form['tags']
+        post = Posts(post_title=post_title, post_about=post_about, post_text=post_text, post_author=post_author, post_last_edit_time=datetime.datetime.now(), tag=tag)
         try:
             db.session.add(post)
             db.session.commit()

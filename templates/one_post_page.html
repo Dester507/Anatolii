@@ -21,6 +21,6 @@
             <p>{{ post.post_text }}</p><br>
             <p>Автор - <strong>{{ post.post_author }}</strong></p><br>
             <hr>
-            <p class="mb-0">Дата публікації - {{ post.created_date.date() }}, Редагування - {{ post.post_last_edit_time.time() }}</p>
+            <p class="mb-0">Дата публікації - {{ post.created_date.date() }}, Редагування - {{ post.post_last_edit_time.time() }}, Тег - {{ post.tag }}</p>
         </div>
 {% endblock %}

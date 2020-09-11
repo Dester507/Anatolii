@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 
 {% block Name %}
-    Пости
+Пости по тегу {{ tag_ua }}
 {% endblock %}
 
 {% block login_logout %}
@@ -15,7 +15,7 @@
 
 {% block fullContent %}
     {% if len_posts != 0 %}
-        {% for i in all_posts %}
+        {% for i in posts %}
             <div class="alert alert-success">
                 <h1 class="alert-heading">{{ i.post_title }}</h1>
                 <p>{{ i.post_about}}</p>
@@ -35,11 +35,11 @@
     {% endif %}
     <nav aria-label="Page navigation example">
           <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="/allPosts/{{ id_list - 1 }}">Попередня</a></li>
-            <li class="page-item"><a class="page-link" href="/allPosts/1">1</a></li>
-            <li class="page-item"><a class="page-link" href="/allPosts/2">2</a></li>
-            <li class="page-item"><a class="page-link" href="/allPosts/3">3</a></li>
-            <li class="page-item"><a class="page-link" href="/allPosts/{{ id_list + 1 }}">Наступна</a></li>
+            <li class="page-item"><a class="page-link" href="/tags/{{ tag }}/{{ id_list - 1 }}">Попередня</a></li>
+            <li class="page-item"><a class="page-link" href="/tags/{{ tag }}/1">1</a></li>
+            <li class="page-item"><a class="page-link" href="/tags/{{ tag }}/2">2</a></li>
+            <li class="page-item"><a class="page-link" href="/tags/{{ tag }}/3">3</a></li>
+            <li class="page-item"><a class="page-link" href="/tags/{{ tag }}/{{ id_list + 1 }}">Наступна</a></li>
           </ul>
         </nav>
 {% endblock %}
